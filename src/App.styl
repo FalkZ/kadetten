@@ -1,0 +1,91 @@
+.AppBar
+ position fixed !important
+ top 0
+ right 0
+ left 0
+
+ .logo
+  *
+   color white
+
+  &>*
+   margin-top -3px !important
+   margin-left -20px !important
+
+.Section, .Title
+ margin 20px
+
+.Menu
+ display none
+ overflow-y scroll !important
+ max-height 80vh !important
+ width 250px
+
+ &>div>div
+  margin-top 5px !important
+  margin-bottom 5px !important
+
+ .item>div>div>div
+  margin-left -20px !important
+
+ .subitem
+  padding-left 18px !important
+
+@media screen and (max-width: 700px)
+ .close
+  .Menu
+   position fixed
+   top 64px
+   right 0
+   left 0
+   z-index 2
+   display block
+   margin 20px
+   width auto
+
+@media screen and (min-width: 700px)
+ .close
+  .Menu
+   position fixed
+   top 64px + 20px
+   left 20px
+   z-index 2
+   display block
+
+  .Section, .Title
+   margin-left 290px
+
+.Title
+ position fixed
+ top 64px
+ background-color rgb(71, 95, 221) !important
+ line-height 64px
+
+ h1
+  margin 0 20px
+  width 100%
+  color white
+  font-weight normal
+  font-size 24px
+
+.Section
+ padding-top 84px + 84px !important
+ padding-bottom -84px + -84px !important
+
+.Markdown
+ padding 20px
+
+ h2
+  margin-top 5px
+  padding-bottom 15px
+  border-bottom 2px solid rgb(71, 95, 221)
+  color rgb(71, 95, 221)
+  font-weight normal
+  font-size 24px
+
+ p
+  font-size 18px
+  line-height 1.5em
+
+strong
+ font-weight 500

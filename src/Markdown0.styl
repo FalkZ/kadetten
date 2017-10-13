@@ -1,0 +1,49 @@
+.Markdown
+ position absolute
+ overflow-y scroll
+ margin 20px
+ padding 20px
+ height auto
+ transition left 450ms cubic-bezier(.23, 1, .32, 1)
+
+ div
+  overflow scroll
+
+Markdown
+ background white !important
+
+ *
+  font-family Roboto, sans-serif
+
+ *:nth-child(3)
+  margin-top 60px !important
+
+ h1, h2.current
+  position fixed
+  right 0
+  left 0
+  margin 0 20px
+  padding 5px 20px
+  color white
+  font-weight 400
+
+ h1
+  top 64px + 20px
+  border-radius 2px
+  // border-bottom 2px solid rgb(71, 95, 221)
+  background-color rgb(71, 95, 221)
+  box-shadow 0 6px 16px -10px rgba(0, 0, 0, .52)
+
+ h2
+  color rgb(71, 95, 221)
+  font-weight 400
+  font-size 20px
+
+  &.current
+   top 64px + 32px
+   text-align right
+
+&.close
+ @media screen and (min-width: 480px)
+  h1, h2.current
+   left 250px + 20px
