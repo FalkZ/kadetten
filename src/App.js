@@ -51,8 +51,8 @@ export default class App extends Component {
 		super(props)
 		this.state = {
 			fetchedcontent: '',
-			menustate: true,
-			menuicon: 'close',
+			menustate: false,
+			menuicon: 'menu',
 			menu: [
 				{ name: 'Aktuell', icon: 'whatshot' },
 				{ name: 'Programm', icon: 'insert_invitation' },

@@ -1,7 +1,7 @@
 {
 	"name": "kadetten",
 	"version": "0.1.0",
-	"homepage": "https://falkz.github.io/paintbox",
+	"homepage": "https://falkz.github.io/kadetten",
 	"private": true,
 	"dependencies": {
 		"custom-react-scripts": "0.2.0",
