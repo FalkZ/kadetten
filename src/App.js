@@ -18,6 +18,8 @@ import scrollify from 'jquery-scrollify'
 
 import IonIcon from './IonIcon'
 
+import Background from './circle-mess.svg'
+
 import './App.styl'
 import './Markdown.styl'
 
@@ -175,7 +177,12 @@ export default class App extends Component {
 					<h1>Programm</h1>
 				</Paper>
 
-				<div className="bg" />
+				<div
+					className="bg"
+					style={{
+						backgroundImage: `url(${Background})`
+					}}
+				/>
 			</div>
 		)
 	}
