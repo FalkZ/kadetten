@@ -120,8 +120,8 @@ export default class App extends Component {
 							fetchedcontent.split('## ').map((section, index) => {
 								if (index == 0) {
 									let temp = section.split('icon: ')
-									topic = temp[0].replace('# ', '')
-									icon = temp[1]
+									topic = temp[0].replace('# ', '').trim()
+									icon = temp[1].trim()
 								} else {
 									titles[index - 1] = section.split('\n')[0]
 									sections[index - 1] = '## ' + section
@@ -151,7 +151,7 @@ export default class App extends Component {
 	}
 
 	getMenu = () =>
-		this.state.menu.map(({ name, icon, submenu, devider }, index) => {
+		this.state.pages.map(({ topic, icon, titles, devider }, index) => {
 			if (devider) {
 				return <Divider key={index} />
 			} else if (typeof submenu === 'undefined') {
@@ -159,8 +159,7 @@ export default class App extends Component {
 					<ListItem
 						key={index}
 						className="item"
-						primaryText={name}
-						href={'#' + name}
+						primaryText={topic}
 						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
 					/>
 				)
@@ -169,11 +168,11 @@ export default class App extends Component {
 					<ListItem
 						key={index}
 						className="item"
-						primaryText={name}
+						primaryText={topic}
 						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
 						primaryTogglesNestedList={true}
-						nestedItems={submenu.map((menutext, index) => (
-							<ListItem key={index} className="subitem" primaryText={menutext} />
+						nestedItems={titles.map((title, index) => (
+							<ListItem key={index} className="subitem" primaryText={title} href={'#' + title} />
 						))}
 					/>
 				)
