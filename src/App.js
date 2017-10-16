@@ -13,8 +13,9 @@ import FontIcon from 'material-ui/FontIcon'
 import Paper from 'material-ui/Paper'
 
 import Markdown from 'react-remarkable'
+import Scrollspy from 'react-scrollspy'
 import $ from 'jquery'
-import scrollify from 'jquery-scrollify'
+//import scrollify from 'jquery-scrollify'
 
 import IonIcon from './IonIcon'
 
@@ -46,12 +47,17 @@ Verschiedene **Spezialanlässe** runden das Jahresprogramm ab. Dazu zählen z.B.
 
 Einzelne dieser Anlässe finden zusammen mit Kadetten aus anderen Orten statt.
 
+## Programm
+Test
 `
 
 export default class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			current: '',
+			sectiontitles: [],
+			sectioncontents: [],
 			fetchedcontent: '',
 			menustate: false,
 			menuicon: 'menu',
@@ -73,7 +79,7 @@ export default class App extends Component {
 
 	componentWillMount = () => this.fetchContent()
 	componentDidMount = () => {
-		$.scrollify({
+		/*$.scrollify({
 			section: '.Section',
 			sectionName: 'section-name',
 			interstitialSection: '',
@@ -86,13 +92,12 @@ export default class App extends Component {
 			overflowScroll: true,
 			updateHash: true,
 			touchScroll: true,
-			before: function() {
-				$.scrollify.update()
-			},
+			before: function() {},
 			after: function() {},
 			afterResize: function() {},
 			afterRender: function() {}
 		})
+    */
 	}
 	fetchContent = () => {
 		fetch('https://raw.githubusercontent.com/acdlite/react-remarkable/master/README.md')
@@ -100,6 +105,16 @@ export default class App extends Component {
 				return response.text()
 			})
 			.then(fetchedcontent => this.setState({ fetchedcontent }))
+
+		let sectiontitles = []
+		let sectioncontents = []
+		programm.split('## ').map((section, index) => {
+			if (index != 0) {
+				sectiontitles[index - 1] = section.split('\n')[0]
+				sectioncontents[index - 1] = '## ' + section
+			}
+		})
+		this.setState({ sectiontitles, sectioncontents })
 	}
 
 	toggleMenu = () => {
@@ -112,6 +127,11 @@ export default class App extends Component {
 		}
 		this.setState({ menustate, menuicon })
 	}
+	getCurrent = () => {
+		console.log($('.current').attr('href'))
+		this.setState({ current: $('.current').attr('href') })
+	}
+
 	getMenu = () =>
 		this.state.menu.map(({ name, icon, submenu, devider }) => {
 			if (devider) {
@@ -121,6 +141,7 @@ export default class App extends Component {
 					<ListItem
 						className="item"
 						primaryText={name}
+						href={'#' + name}
 						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
 					/>
 				)
@@ -145,11 +166,11 @@ export default class App extends Component {
 						return false
 					} else {
 						return (
-							<div className="Section" data-section-name={section.split('\n')[0]}>
+							<section className="Section" id={section.split('\n')[0]}>
 								<Paper className="Markdown" zDepth={5}>
 									<Markdown source={'## ' + section} />
 								</Paper>
-							</div>
+							</section>
 						)
 					}
 				})}
@@ -183,6 +204,9 @@ export default class App extends Component {
 						backgroundImage: `url(${Background})`
 					}}
 				/>
+				<Scrollspy items={this.state.sectiontitles} currentClassName="current">
+					{this.state.sectiontitles.map((title, index) => <a href={'#' + title} key={index} />)}
+				</Scrollspy>
 			</div>
 		)
 	}
