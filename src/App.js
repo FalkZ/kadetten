@@ -56,6 +56,7 @@ export default class App extends Component {
 		super(props)
 		this.state = {
 			current: '',
+			index: 0,
 			pages: [{ topic: ' ', icon: ' ', titles: [' '], sections: [' '] }],
 			fetchedcontent: '',
 			menustate: false,
@@ -99,6 +100,7 @@ export default class App extends Component {
     */
 	}
 	fetchContent = () => {
+		console.log('fetch')
 		var pages = []
 		fetch('https://api.github.com/repos/falkz/kadetten/contents/pages')
 			.then(response => {
@@ -135,6 +137,13 @@ export default class App extends Component {
 			})
 	}
 
+	setIndex = index => {
+		console.log(index)
+		this.setState({ index })
+
+		//this.setState({ index })
+	}
+
 	toggleMenu = () => {
 		let menuicon
 		let menustate = !this.state.menustate
@@ -154,15 +163,6 @@ export default class App extends Component {
 		this.state.pages.map(({ topic, icon, titles, devider }, index) => {
 			if (devider) {
 				return <Divider key={index} />
-			} else if (typeof submenu === 'undefined') {
-				return (
-					<ListItem
-						key={index}
-						className="item"
-						primaryText={topic}
-						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
-					/>
-				)
 			} else {
 				return (
 					<ListItem
@@ -171,8 +171,17 @@ export default class App extends Component {
 						primaryText={topic}
 						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
 						primaryTogglesNestedList={true}
-						nestedItems={titles.map((title, index) => (
-							<ListItem key={index} className="subitem" primaryText={title} href={'#' + title} />
+						onClick={() => this.setIndex(index)}
+						id={index}
+						nestedItems={titles.map((title, key) => (
+							<ListItem
+								key={key}
+								className="subitem"
+								primaryText={title}
+								href={'#' + title}
+								onClick={() => this.setIndex(index)}
+								id={`${index}-${title}`}
+							/>
 						))}
 					/>
 				)
@@ -182,7 +191,7 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className={`App ${this.state.menuicon}`}>
-				{this.state.pages[0].sections.map((section, index) => (
+				{this.state.pages[this.state.index].sections.map((section, index) => (
 					<section key={index} className="Section" id={section.split('\n')[0]}>
 						<Paper className="Markdown" zDepth={5}>
 							<Markdown source={section} />
@@ -210,7 +219,7 @@ export default class App extends Component {
 					<List>{this.getMenu()}</List>
 				</Paper>
 				<Paper zDepth={1} className="Title">
-					<h1>Programm</h1>
+					<h1>{this.state.pages[this.state.index].topic}</h1>
 				</Paper>
 				<div
 					className="bg"
