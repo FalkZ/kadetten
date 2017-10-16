@@ -1,3 +1,5 @@
+# Programm
+icon: insert_invitation
 ## Unser Programm hat Konzept
 
 Das **Grundgerüst** unseres Programmes bilden die Samstagprogramme. Diese finden in zweiwöchtenlich am Samstagnachmittag an verschiedenen Orten in der Stadt Zürich statt. Der Zweiwochenrhythmus erlaubt eine unkomplizierte Planung des Familienprogramms. Zur Erreichung der Gruppenzugehörigkeit ist eine regelmässige Teilnahme an den Übungen von grosser Bedeutung. Während der Schulferien finden keine Samstagsprogramme statt.

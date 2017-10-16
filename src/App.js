@@ -56,8 +56,7 @@ export default class App extends Component {
 		super(props)
 		this.state = {
 			current: '',
-			sectiontitles: [],
-			sectioncontents: [],
+			pages: [{ topic: ' ', icon: ' ', titles: [' '], sections: [' '] }],
 			fetchedcontent: '',
 			menustate: false,
 			menuicon: 'menu',
@@ -100,21 +99,40 @@ export default class App extends Component {
     */
 	}
 	fetchContent = () => {
-		fetch('https://raw.githubusercontent.com/acdlite/react-remarkable/master/README.md')
+		var pages = []
+		fetch('https://api.github.com/repos/falkz/kadetten/contents/pages')
 			.then(response => {
-				return response.text()
+				return response.json()
 			})
-			.then(fetchedcontent => this.setState({ fetchedcontent }))
+			.then(response => {
+				console.log(response)
+				response.map((tofetch, index) => {
+					fetch(tofetch.download_url)
+						.then(response => {
+							return response.text()
+						})
+						.then(fetchedcontent => {
+							let topic = ''
+							let icon = ''
+							let titles = []
+							let sections = []
 
-		let sectiontitles = []
-		let sectioncontents = []
-		programm.split('## ').map((section, index) => {
-			if (index != 0) {
-				sectiontitles[index - 1] = section.split('\n')[0]
-				sectioncontents[index - 1] = '## ' + section
-			}
-		})
-		this.setState({ sectiontitles, sectioncontents })
+							fetchedcontent.split('## ').map((section, index) => {
+								if (index == 0) {
+									let temp = section.split('icon: ')
+									topic = temp[0].replace('# ', '')
+									icon = temp[1]
+								} else {
+									titles[index - 1] = section.split('\n')[0]
+									sections[index - 1] = '## ' + section
+								}
+							})
+
+							pages[index] = { topic, icon, titles, sections }
+						})
+						.then(() => this.setState({ pages }))
+				})
+			})
 	}
 
 	toggleMenu = () => {
@@ -133,12 +151,13 @@ export default class App extends Component {
 	}
 
 	getMenu = () =>
-		this.state.menu.map(({ name, icon, submenu, devider }) => {
+		this.state.menu.map(({ name, icon, submenu, devider }, index) => {
 			if (devider) {
-				return <Divider />
+				return <Divider key={index} />
 			} else if (typeof submenu === 'undefined') {
 				return (
 					<ListItem
+						key={index}
 						className="item"
 						primaryText={name}
 						href={'#' + name}
@@ -148,11 +167,14 @@ export default class App extends Component {
 			} else {
 				return (
 					<ListItem
+						key={index}
 						className="item"
 						primaryText={name}
 						leftIcon={<FontIcon className="material-icons">{icon}</FontIcon>}
 						primaryTogglesNestedList={true}
-						nestedItems={submenu.map(menutext => <ListItem className="subitem" primaryText={menutext} />)}
+						nestedItems={submenu.map((menutext, index) => (
+							<ListItem key={index} className="subitem" primaryText={menutext} />
+						))}
 					/>
 				)
 			}
@@ -161,19 +183,13 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className={`App ${this.state.menuicon}`}>
-				{programm.split('## ').map((section, index) => {
-					if (index == 0) {
-						return false
-					} else {
-						return (
-							<section className="Section" id={section.split('\n')[0]}>
-								<Paper className="Markdown" zDepth={5}>
-									<Markdown source={'## ' + section} />
-								</Paper>
-							</section>
-						)
-					}
-				})}
+				{this.state.pages[0].sections.map((section, index) => (
+					<section key={index} className="Section" id={section.split('\n')[0]}>
+						<Paper className="Markdown" zDepth={5}>
+							<Markdown source={section} />
+						</Paper>
+					</section>
+				))}
 				<AppBar
 					className="AppBar"
 					title="Kadetten Zürich"
@@ -197,15 +213,20 @@ export default class App extends Component {
 				<Paper zDepth={1} className="Title">
 					<h1>Programm</h1>
 				</Paper>
-
 				<div
 					className="bg"
 					style={{
 						backgroundImage: `url(${Background})`
 					}}
 				/>
-				<Scrollspy items={this.state.sectiontitles} currentClassName="current">
-					{this.state.sectiontitles.map((title, index) => <a href={'#' + title} key={index} />)}
+
+				<div className="arrow">
+					<IconButton className="arrow" onClick={this.toggleMenu} iconClassName="material-icons">
+						keyboard_arrow_down
+					</IconButton>
+				</div>
+				<Scrollspy items={this.state.pages[0].titles} currentClassName="current">
+					{this.state.pages[0].titles.map((title, index) => <a href={'#' + title} key={index} />)}
 				</Scrollspy>
 			</div>
 		)
