@@ -119,7 +119,7 @@ export default class App extends Component {
 							let titles = []
 							let sections = []
 
-							fetchedcontent.split('## ').map((section, index) => {
+							fetchedcontent.split('\n## ').map((section, index) => {
 								if (index == 0) {
 									let temp = section.split('icon: ')
 									topic = temp[0].replace('# ', '').trim()

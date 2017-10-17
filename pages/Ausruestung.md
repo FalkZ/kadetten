@@ -18,7 +18,7 @@ Damit sieht man bei schönem und bei schlechtem Wetter als Kadett gut aus!
 ## Schuhe
  **Zudem erwarten wir**
 *   **Gute Trekking- oder Wanderschuhe.** Gute Schuhe schützen den Fuss und bieten Halt im Gelände. Sie haben folgende Eigenschaften:
-  - gutes (tiefes) Profil (gegen Ausrutschen) 
+  - gutes (tiefes) Profil (gegen Ausrutschen)
   - stützt die Knöchel (gegen Verstauchungen)
 
 gut: | nicht gut:
@@ -27,7 +27,7 @@ gut: | nicht gut:
 
  Kinder brauchen im Wachstum regelmässig grössere Schuhe. Günstige Schuhe finden Sie zum Beispiel in [Kleiderbörsen](http://www.kindex.ch) oder bei  [SportXX](http://www.sportxx.ch).
 
-### **Ausrüstung**
+### Ausrüstung
 
 Das Material für unsere Programme stellen wir jeweils zur Verfügung. Zudem soll aber jeder Kadett eine kleine persönliche Ausrüstung mitnehmen. Wir sagen dem **«Die 7 Sachen»**:
 
