@@ -1,5 +1,5 @@
 # Bekleidung + Ausrüstung
-icon: accessibillity
+icon: accessibility
 ## Bekleidung
 Mit einer dem Wetter angepassten und sicheren Bekleidung macht das Kadettenprogramm erst richtig Freude! **Im Jahresbeitrag inbegriffen** ist leihweise eine
 
