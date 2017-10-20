@@ -1,3 +1,12 @@
+niceblue = #475fdd
+kadettenblue = #3749a3
+linkviolet = #128279
+themeprimary = kadettenblue
+themesecondary = linkviolet
+
+.bg
+ opacity .8
+
 .arrow
  position fixed !important
  right 0 !important
@@ -14,7 +23,7 @@
   padding-top 9px
   padding-bottom 5px
   border-radius 20px
-  background-color #475fdd !important
+  background-color themeprimary !important
   box-shadow rgba(0, 0, 0, .12) 0 1px 6px, rgba(0, 0, 0, .12) 0 1px 4px
   color white !important
   line-height 10px
@@ -35,6 +44,7 @@
  top 0
  right 0
  left 0
+ background-color themeprimary !important
 
  .logo
   *
@@ -54,7 +64,7 @@
  width 250px
 
  .current
-  color #475fdd
+  color themeprimary
 
  &>div>div
   margin-top 5px !important
@@ -93,7 +103,7 @@
 .Title
  position fixed
  top 64px
- background-color #475fdd !important
+ background-color themeprimary !important
  line-height 64px
 
  h1
@@ -104,6 +114,7 @@
   font-size 24px
 
 .Section
+ margin-bottom - 84px !important
  padding-top 84px !important
  min-height 100vh
 
@@ -112,20 +123,22 @@
 
 .Markdown
  padding 20px
+ background-color white !important
 
  h2
   margin-top 0
-  padding-bottom 15px
-  border-bottom 2px solid rgb(71, 95, 221)
-  color rgb(71, 95, 221)
+  padding-bottom 10px
+  border-bottom 2px solid lighten(themeprimary, 20%)
+  color lighten(themeprimary, 20%)
   font-weight 500
   font-size 24px
 
  h3
-  color rgb(71, 95, 221)
+  color themeprimary
   font-weight 500
 
- p, li
+ p, li, strong
+  color lighten(#2B2D42, 0) !important
   font-size 17px
   line-height 1.3em
 
@@ -136,8 +149,18 @@
   padding-left 1.2em
 
  a
-  color lighten(saturate(#475fdd, 130%), 40%)
+  color lighten(#2B2D42, 10%)
+  // color themesecondary
   text-decoration none
+
+  &:hover
+   color lighten(themeprimary, 20%)
+
+  &:after
+   padding-left .3em
+   content '\f08e'
+   font-size .7em
+   font-family 'FontAwesome'
 
  img
   width 100%

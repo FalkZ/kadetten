@@ -141,6 +141,7 @@ export default class App extends Component {
 		console.log(index)
 		this.setState({ index })
 
+		window.location.hash = window.location.hash
 		//this.setState({ index })
 	}
 
@@ -192,7 +193,7 @@ export default class App extends Component {
 		return (
 			<div className={`App ${this.state.menuicon}`}>
 				{this.state.pages[this.state.index].sections.map((section, index) => (
-					<section key={index} className="Section" id={section.split('\n')[0]}>
+					<section key={index} className="Section" id={this.state.pages[this.state.index].titles[index]}>
 						<Paper className="Markdown" zDepth={5}>
 							<Markdown source={section} />
 						</Paper>
@@ -224,6 +225,7 @@ export default class App extends Component {
 				<div
 					className="bg"
 					style={{
+						backgroundColor: '#3f8c0b',
 						backgroundImage: `url(${Background})`
 					}}
 				/>
