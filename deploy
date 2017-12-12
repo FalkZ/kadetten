@@ -2,6 +2,17 @@
 
 
 # sed 's/\/kadetten/build/g' ./build/index.html > index.html
+
+
+cp -f -R build/* .
+
 git add -A
 git commit -m 'update'
 git push -u origin master
+
+rm -rf static
+rm favicon.ico
+rm index.html
+rm manifest.json
+rm service-worker.js
+rm asset-manifest.json
